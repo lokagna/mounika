@@ -1,0 +1,40 @@
+---
+- hosts: webservers
+  become: yes
+
+  tasks:
+  - name: ensure apache is at the present version
+    apt:
+      name: apache2
+      state: present
+  - name: start apache2 service
+    service:
+      name: apache2
+      state: started
+  - name: copy index.html to apache2 location
+    copy:
+      src: /home/vagrant/index.html
+      dest: /var/www/html
+     # remote_src: yes
+  - name: restart apache2 service
+    service:
+      name: apache2
+      state: restarted
+
+
+
+- hosts: dbservers
+  become: yes
+ #remote_user: vagrant
+
+  tasks:
+  - name: ensure postgresql is at the present version
+    apt:
+      name: postgresql
+      state: present
+  - name: ensure that postgresql is started
+    service:
+      name: postgresql
+      state: started
+
+
