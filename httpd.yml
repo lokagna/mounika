@@ -1,5 +1,5 @@
 ---
-- hosts: webservers
+- hosts: web01
   become: yes
 
   tasks:
@@ -23,7 +23,7 @@
 
 
 
-- hosts: dbservers
+- hosts: db01
   become: yes
  #remote_user: vagrant
 
